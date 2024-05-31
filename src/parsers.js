@@ -1,1 +1,1 @@
-export const JSONparse =(data)=> JSON.parse(data)
+export const JSONparse = (data)=> JSON.parse(data)
