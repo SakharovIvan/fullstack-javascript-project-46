@@ -1,34 +1,18 @@
-import fs from "node:fs";
 import _ from "lodash";
-import { JSONparse } from "./parsers.js";
+import { fileParse } from "./parsers.js";
+import { getDiffernceObjects, makeFixtures, getFileType, getFilePath } from "./utils.js";
+import makeFormat from './formatters/index.js'
 
-const makeCheck = (path1, path2) => {
-  const readpath1 = fs.readFileSync(path1, { encoding: "utf8", flag: "r" });
-  const readpath2 = fs.readFileSync(path2, { encoding: "utf8", flag: "r" });
-
-  const data1 = JSONparse(readpath1);
-  const data2 = JSONparse(readpath2);
-  const keys1 = Object.keys(data1);
-  const keys2 = Object.keys(data2);
-  const keys = _.sortBy(_.union(keys1, keys2));
-  const result = {};
-
-  for (const key of keys) {
-    if (!Object.hasOwn(data1, key)) {
-      result["+ " + key] = data2[key];
-    } else if (!Object.hasOwn(data2, key)) {
-      result["- " + key] = data1[key];
-    } else if (data1[key] !== data2[key]) {
-      result["+ " + key] = data1[key];
-      result["- " + key] = data2[key];
-    } else {
-      result[key] = data1[key];
-    }
-  }
-console.log(result)
-  return JSON.stringify(result);
+const makeCheck = (path1, path2,style= 'stylish' ) => {
+  const dataType1 = getFileType(path1);
+  const data1 = fileParse(path1, dataType1);
+  const dataType2 = getFileType(path2);
+  const data2 = fileParse(path2, dataType2);
+  const difObject = getDiffernceObjects(data1,data2)
+  const result = makeFormat(difObject,style)
+  return result
 };
 
-//makeCheck(file1,file2)
+
 
 export default makeCheck;
