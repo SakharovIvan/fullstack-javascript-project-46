@@ -18,21 +18,23 @@ const makeStylish = (tree) => {
     }
     switch (key.action) {
       case "added":
-        return `${"  ".repeat(key.level)}Property   ${
-          key.key
-        }  was added with value: ${getString(key.newValue)}\n`;
+        return `Property ${
+        key.momKey.substring(1)
+        } was added with value: ${getString(key.newValue)}\n`;
       case "changed":
-        return `${"  ".repeat(key.level)}Property ${
-          key.key
+        return `Property ${
+          key.momKey.substring(1)
         } was updated. From ${getString(key.oldValue)} to ${getString(
           key.newValue
         )}\n`;
       case "deleted":
-        return `${"  ".repeat(key.level)}Property  ${key.key}: ${getString(
+        return `Property ${key.momKey.substring(1)} ${getString(
           key.oldValue
         )} was removed\n`;
       default:
-        return `${"  ".repeat(key.level)}   ${key.key} wasnot changed\n`;
+        return `Property ${
+          key.momKey.substring(1)
+        } wasnot changed\n`;
     }
   });
   return result.join("");
