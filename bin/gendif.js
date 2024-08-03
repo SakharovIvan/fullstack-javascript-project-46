@@ -11,6 +11,7 @@ program
   .option("-f, --format <type>", 'output format (default: "stylish"')
   .helpOption("-h, --help", "output usage information")
   .action((filepath1, filepath2, option) => {
+    console.log(makeCheck(filepath1, filepath2, option.format).length);
     console.log(makeCheck(filepath1, filepath2, option.format));
   });
 

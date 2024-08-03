@@ -18,13 +18,13 @@ const makeStylish = (tree) => {
     }
     switch (key.action) {
       case "added":
-        return `Property ${
-        key.momKey.substring(1)
-        } was added with value: ${getString(key.newValue)}\n`;
+        return `Property ${key.momKey.substring(
+          1
+        )} was added with value: ${getString(key.newValue)}\n`;
       case "changed":
-        return `Property ${
-          key.momKey.substring(1)
-        } was updated. From ${getString(key.oldValue)} to ${getString(
+        return `Property ${key.momKey.substring(
+          1
+        )} was updated. From ${getString(key.oldValue)} to ${getString(
           key.newValue
         )}\n`;
       case "deleted":
@@ -32,9 +32,7 @@ const makeStylish = (tree) => {
           key.oldValue
         )} was removed\n`;
       default:
-        return `Property ${
-          key.momKey.substring(1)
-        } wasnot changed\n`;
+        return `Property ${key.momKey.substring(1)} wasnot changed\n`;
     }
   });
   return result.join("");
