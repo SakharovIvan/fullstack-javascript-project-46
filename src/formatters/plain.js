@@ -9,39 +9,36 @@ function getString(value) {
   }
 }
 
-
-
 const makePlain = (tree) => {
-  const result = tree.map((key) => {
-    if (key instanceof Array) {
-      return makePlain(key);
-    }
-    switch (key.action) {
-      case "nested":
+  const plainer = (value, depth) => {
+    const result = value.map((str) => {
+      const { key, action, oldValue, children, newValue } = str;
+      switch (action) {
+        case "nested":
+          return `${"  ".repeat(depth)}  ${key}:\n${plainer(
+            children,
+            depth + 1
+          )}`;
+        case "added":
+          console.log(depth, newValue);
+          return `${"  ".repeat(depth)}+  ${key}: ${getString(newValue)}\n`;
+        case "changed":
+          return `${"  ".repeat(depth)}-  ${key}: ${getString(
+            oldValue
+          )}\n${"  ".repeat(depth)}+  ${key}: ${getString(newValue)}\n`;
+        case "deleted":
+          return `${"  ".repeat(depth)}-  ${key}: ${getString(oldValue)}\n`;
+        case "unchanged":
+          console.log(depth, oldValue);
+          return `${"  ".repeat(depth)}   ${key}: ${getString(oldValue)}\n`;
+        default:
+          console.log("error", str);
+      }
+    });
+    return result.join("");
+  };
 
-      case "added":
-        return `${"  ".repeat(key.level)}+  ${key.key}: ${getString(
-          key.newValue
-        )}\n`;
-      case "changed":
-        return `${"  ".repeat(key.level)}-  ${key.key}: ${getString(
-          key.oldValue
-        )}\n${"  ".repeat(key.level)}+  ${key.key}: ${getString(
-          key.newValue
-        )}\n`;
-      case "deleted":
-        return `${"  ".repeat(key.level)}-  ${key.key}: ${getString(
-          key.oldValue
-        )}\n`;
-      case "unchanged":
-        return `${"  ".repeat(key.level)}   ${key.key}: ${getString(
-          key.oldValue
-        )}\n`;
-      default:
-        console.log("error", str);
-    }
-  });
-  return result.join("");
+  return plainer(tree, 0);
 };
 
 export default makePlain;

@@ -1,5 +1,3 @@
-import { getDiffernceObjects } from "../utils.js";
-
 function getString(value) {
   switch (typeof value) {
     case "object":
@@ -16,7 +14,6 @@ const makeStylish = (tree) => {
     const result = value.map((str) => {
       const { key, action, oldValue, children, newValue } = str;
       const path = momKey === "" ? `${key}` : `${momKey}.${key}`;
-
       switch (action) {
         case "nested":
           return style(children, path);
@@ -33,7 +30,7 @@ const makeStylish = (tree) => {
         case "unchanged":
           return `Property ${path} wasnot changed\n`;
         default:
-          console.log('error', str)
+          console.log("error", str);
       }
     });
     return [...result].join("");

@@ -18,7 +18,6 @@ const makeCheck = (path1, path2, style = "stylish") => {
   const data2 = fileParse(filePath2, dataType2);
 
   const difObject = getDiffernceObjects(data1, data2);
-  console.log(difObject)
   const result = makeFormat(difObject, style);
   return result;
 };
