@@ -12,30 +12,33 @@ function getString(value) {
 }
 
 const makeStylish = (tree) => {
-  const result = tree.map((key) => {
-    if (key instanceof Array) {
-      return makeStylish(key);
-    }
-    switch (key.action) {
-      case "added":
-        return `Property ${key.momKey.substring(
-          1
-        )} was added with value: ${getString(key.newValue)}\n`;
-      case "changed":
-        return `Property ${key.momKey.substring(
-          1
-        )} was updated. From ${getString(key.oldValue)} to ${getString(
-          key.newValue
-        )}\n`;
-      case "deleted":
-        return `Property ${key.momKey.substring(1)} ${getString(
-          key.oldValue
-        )} was removed\n`;
-      default:
-        return `Property ${key.momKey.substring(1)} wasnot changed\n`;
-    }
-  });
-  return result.join("");
+  const style = (value, momKey) => {
+    const result = value.map((str) => {
+      const { key, action, oldValue, children, newValue } = str;
+      const path = momKey === "" ? `${key}` : `${momKey}.${key}`;
+
+      switch (action) {
+        case "nested":
+          return style(children, path);
+        case "added":
+          return `Property ${path} was added with value: ${getString(
+            newValue
+          )}\n`;
+        case "changed":
+          return `Property ${path} was updated. From ${getString(
+            oldValue
+          )} to ${getString(newValue)}\n`;
+        case "deleted":
+          return `Property ${path} ${getString(oldValue)} was removed\n`;
+        case "unchanged":
+          return `Property ${path} wasnot changed\n`;
+        default:
+          console.log('error', str)
+      }
+    });
+    return [...result].join("");
+  };
+  return style(tree, "");
 };
 
 export default makeStylish;

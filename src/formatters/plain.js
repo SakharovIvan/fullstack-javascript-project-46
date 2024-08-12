@@ -9,12 +9,16 @@ function getString(value) {
   }
 }
 
+
+
 const makePlain = (tree) => {
   const result = tree.map((key) => {
     if (key instanceof Array) {
       return makePlain(key);
     }
     switch (key.action) {
+      case "nested":
+
       case "added":
         return `${"  ".repeat(key.level)}+  ${key.key}: ${getString(
           key.newValue
@@ -29,10 +33,12 @@ const makePlain = (tree) => {
         return `${"  ".repeat(key.level)}-  ${key.key}: ${getString(
           key.oldValue
         )}\n`;
-      default:
+      case "unchanged":
         return `${"  ".repeat(key.level)}   ${key.key}: ${getString(
           key.oldValue
         )}\n`;
+      default:
+        console.log("error", str);
     }
   });
   return result.join("");

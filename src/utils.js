@@ -1,54 +1,41 @@
 import _ from "lodash";
 
-const getDiffernceObjects = (obj1, obj2, level = 0, momKey = "") => {
-  const result = _.sortBy(_.union(_.keys(obj1), _.keys(obj2))).map((key) => {
-    const oldValue = structuredClone(obj1[key]);
-    const newValue = structuredClone(obj2[key]);
-    if (!Object.hasOwn(obj1, key)) {
+const getDiffernceObjects = (obj1, obj2) => {
+  const keys = _.sortBy(_.union(Object.keys(obj1), Object.keys(obj2)));
+  return keys.map((key) => {
+    
+    if (!_.has(obj1, key)) {
       return {
         action: "added",
-        level,
-        momKey: `${momKey}.${key}`,
         key,
-        newValue,
+        newValue: obj2[key],
       };
     }
-    if (!Object.hasOwn(obj2, key)) {
+    if (!_.has(obj2, key)) {
       return {
         action: "deleted",
-        level,
-        momKey: `${momKey}.${key}`,
         key,
-        oldValue,
+        oldValue: obj1[key],
       };
     }
-    if (oldValue instanceof Object && newValue instanceof Object) {
-      return getDiffernceObjects(
-        oldValue,
-        newValue,
-        level + 1,
-        `${momKey}.${key}`
-      );
+    if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
+      const children = getDiffernceObjects(obj1[key], obj2[key]);
+      return { key, action: "nested", children };
     }
-    if (oldValue !== newValue) {
+    if (obj1[key] !== obj2[key]) {
       return {
-        action: "changed",
-        level,
-        momKey: `${momKey}.${key}`,
         key,
-        oldValue,
-        newValue,
+        action: "changed",
+        oldValue: obj1[key],
+        newValue: obj2[key],
       };
     }
     return {
       action: "unchanged",
-      level,
-      momKey: `${momKey}.${key}`,
       key,
-      oldValue,
+      oldValue: obj1[key],
     };
   });
-  return result;
 };
 
 export { getDiffernceObjects };

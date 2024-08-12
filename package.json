@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "type": "module",
-  "author": "",
+  "author": "Ivan Sakharov",
   "license": "ISC",
   "dependencies": {
     "commander": "^12.1.0",
