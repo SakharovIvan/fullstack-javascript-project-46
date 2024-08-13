@@ -20,7 +20,6 @@ const makePlain = (tree) => {
             depth + 1
           )}`;
         case "added":
-          console.log(depth, newValue);
           return `${"  ".repeat(depth)}+  ${key}: ${getString(newValue)}\n`;
         case "changed":
           return `${"  ".repeat(depth)}-  ${key}: ${getString(
@@ -29,7 +28,6 @@ const makePlain = (tree) => {
         case "deleted":
           return `${"  ".repeat(depth)}-  ${key}: ${getString(oldValue)}\n`;
         case "unchanged":
-          console.log(depth, oldValue);
           return `${"  ".repeat(depth)}   ${key}: ${getString(oldValue)}\n`;
         default:
           console.log("error", str);
