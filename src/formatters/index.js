@@ -4,9 +4,9 @@ import makePlain from "./plain.js";
 export default makeFormat = (tree, formatName) => {
   switch (formatName) {
     case "stylish":
-      return `${makeStylish(tree)}\n`;
+      return makeStylish(tree);
     case "plain":
-      return `${makePlain(tree)}\n`;
+      return makePlain(tree);
     case "json":
       return JSON.stringify(tree, null, " ");
     default:
