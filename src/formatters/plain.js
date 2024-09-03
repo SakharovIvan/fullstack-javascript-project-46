@@ -30,7 +30,7 @@ const makePlain = (tree) => {
           return console.log('error', str);
       }
     });
-    return [...result].filter((item) => item !== undefined || item!=='').join('\n');
+    return [...result].filter((item) => item !== undefined).join('\n').replace(/\n$/m, '');;
   };
   return style(tree, '');
 };
