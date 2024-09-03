@@ -6,7 +6,7 @@ export default makeFormat = (tree, formatName) => {
     case "stylish":
       return `${makeStylish(tree)}\n`;
     case "plain":
-      return makePlain(tree);
+      return `${makePlain(tree)}\n`;
     case "json":
       return JSON.stringify(tree, null, " ");
     default:
