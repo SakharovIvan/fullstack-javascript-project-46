@@ -37,4 +37,4 @@ const getDiffernceObjects = (obj1, obj2) => {
   });
 };
 
-export { getDiffernceObjects };
+export default getDiffernceObjects;

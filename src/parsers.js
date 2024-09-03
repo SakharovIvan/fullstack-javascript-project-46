@@ -14,8 +14,8 @@ const YAMLparse = (data) => {
   try {
     const readpath = fs.readFileSync(data, { encoding: 'utf8', flag: 'r' });
     return yaml.load(readpath);
-  } catch (err) {
-    console.log(err);
+  } catch {
+    throw new Error(`Some problem with parsdata ${data}!`);
   }
 };
 
