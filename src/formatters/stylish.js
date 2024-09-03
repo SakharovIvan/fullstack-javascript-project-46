@@ -1,41 +1,49 @@
-function getString(value) {
+const space = "    ";
+const gap = (depth) => space.repeat(depth);
+
+function getString(value, depth) {
   switch (typeof value) {
     case "object":
-      return value == null ? value : JSON.stringify(value);
+      return value === null ? value : objCreate(value, depth);
     case "string":
-      return `'${value}'`;
+      return value;
     default:
       return value;
   }
 }
+const objCreate = (obj, depth) => {
+  const keys = Object.keys(obj);
+  const strings = keys.map((key) => {
+    return `${gap(depth)}    ${key}: ${getString(obj[key], depth+1)}`;
+  });
+  return `{\n${strings.join("\n")}\n${gap(depth)}}`;
+};
+
+const stylisher = (value, depth) => {
+  const result = value.map((str) => {
+    const { key, action, oldValue, children, newValue } = str;
+    switch (action) {
+      case "nested":
+        return `${gap(depth)}    ${key}: ${stylisher(children, depth + 1)}`;
+      case "added":
+        return `${gap(depth)}  + ${key}: ${getString(newValue, depth+1)}`;
+      case "changed":
+        return `${gap(depth)}  - ${key}: ${getString(oldValue, depth+1)}\n${gap(
+          depth+1
+        )}  + ${key}: ${getString(newValue, depth+1)}`;
+      case "deleted":
+        return `${gap(depth)}  - ${key}: ${getString(oldValue, depth+1)}`;
+      case "unchanged":
+        return `${gap(depth)}    ${key}: ${getString(oldValue, depth+1)}`;
+      default:
+        throw new Error("something wrong");
+    }
+  });
+  return `{\n${result.join("\n")}\n${gap(depth)}}`;
+};
 
 const makeStylish = (tree) => {
-  const style = (value, momKey) => {
-    const result = value.map((str) => {
-      const { key, action, oldValue, children, newValue } = str;
-      const path = momKey === "" ? `${key}` : `${momKey}.${key}`;
-      switch (action) {
-        case "nested":
-          return style(children, path);
-        case "added":
-          return `Property ${path} was added with value: ${getString(
-            newValue
-          )}\n`;
-        case "changed":
-          return `Property ${path} was updated. From ${getString(
-            oldValue
-          )} to ${getString(newValue)}\n`;
-        case "deleted":
-          return `Property ${path} ${getString(oldValue)} was removed\n`;
-        case "unchanged":
-          return `Property ${path} wasnot changed\n`;
-        default:
-          console.log("error", str);
-      }
-    });
-    return [...result].join("");
-  };
-  return style(tree, "");
+  return stylisher(tree, 0);
 };
 
 export default makeStylish;

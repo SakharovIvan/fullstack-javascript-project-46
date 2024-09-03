@@ -1,15 +1,15 @@
-import getStylish from "./stylish.js";
-import getPlain from "./plain.js";
+import makeStylish from "./stylish.js";
+import makePlain from "./plain.js";
 
-export default function makeFormat(tree, formatName) {
+export default makeFormat = (tree, formatName) => {
   switch (formatName) {
     case "stylish":
-      return getStylish(tree);
+      return makeStylish(tree);
     case "plain":
-      return getPlain(tree);
+      return makePlain(tree);
     case "json":
-      return JSON.stringify(tree);
+      return JSON.stringify(tree, null, " ");
     default:
-      throw new Error("Output format is not correct");
+      throw new Error(`Output format is not correct ${formatName}`);
   }
-}
+};

@@ -27,6 +27,6 @@ export const fileParse = (data, type) => {
       return YAMLparse(data);
     case "yml":
       return YAMLparse(data);
+    default: throw new Error(`Some problem with format ${type}!`)
   }
-  return console.log(`Some problem with format ${type}!`);
 };
