@@ -29,7 +29,7 @@ const stylisher = (value, depth) => {
         return `${gap(depth)}  + ${key}: ${getString(newValue, depth+1)}`;
       case "changed":
         return `${gap(depth)}  - ${key}: ${getString(oldValue, depth+1)}\n${gap(
-          depth+1
+          depth
         )}  + ${key}: ${getString(newValue, depth+1)}`;
       case "deleted":
         return `${gap(depth)}  - ${key}: ${getString(oldValue, depth+1)}`;
