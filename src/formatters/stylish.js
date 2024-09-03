@@ -3,9 +3,7 @@ const gap = (depth) => space.repeat(depth);
 
 const objCreate = (obj, depth) => {
   const keys = Object.keys(obj);
-  const strings = keys.map((key) => {
-    return `${gap(depth)}    ${key}: ${getString(obj[key], depth + 1)}`;
-  });
+  const strings = keys.map((key) => `${gap(depth)}    ${key}: ${getString(obj[key], depth + 1)}`);
   return `{\n${strings.join('\n')}\n${gap(depth)}}`;
 };
 

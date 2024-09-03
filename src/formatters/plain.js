@@ -12,9 +12,9 @@ function getString(value) {
 const makePlain = (tree) => {
   const style = (value, momKey) => {
     const result = value.map((str) => {
-
-      const { key, action, oldValue, children, newValue } = str;
-
+      const 
+      { key, action, oldValue, children, newValue 
+      } = str;
       const path = momKey === '' ? `${key}` : `${momKey}.${key}`;
       switch (action) {
         case 'nested':

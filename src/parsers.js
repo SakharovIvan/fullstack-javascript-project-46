@@ -5,8 +5,8 @@ const JSONparse = (data) => {
   try {
     const readpath = fs.readFileSync(data, { encoding: 'utf8', flag: 'r' });
     return JSON.parse(readpath);
-  } catch (error) {
-    console.log(err);
+  } catch {
+    throw new Error(`Some problem with parsdata ${data}!`);
   }
 };
 
@@ -17,6 +17,7 @@ const YAMLparse = (data) => {
   } catch {
     throw new Error(`Some problem with parsdata ${data}!`);
   }
+  return
 };
 
 export const fileParse = (data, type) => {
