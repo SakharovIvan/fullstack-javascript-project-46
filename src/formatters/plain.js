@@ -1,7 +1,7 @@
 function getString(value) {
   switch (typeof value) {
     case "object":
-      return value == null ? value : `[complex value]`
+      return value == null ? value : `[complex value]`;
     case "string":
       return `'${value}'`;
     default:
@@ -26,14 +26,12 @@ const makePlain = (tree) => {
             oldValue
           )} to ${getString(newValue)}`;
         case "deleted":
-          return `Property '${path}' was removed`; // ${getString(oldValue)}
-       // case "unchanged":
-       //   return `Property '${path}' wasnot changed\n`;
+          return `Property '${path}' was removed`;
         default:
           console.log("error", str);
       }
     });
-    return [...result].join("\n");
+    return [...result].filter((item) => item !== undefined).join("\n");
   };
   return style(tree, "");
 };
