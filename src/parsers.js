@@ -1,9 +1,9 @@
-import yaml from "js-yaml";
-import fs from "node:fs";
+import yaml from 'js-yaml';
+import fs from 'node:fs';
 
 const JSONparse = (data) => {
   try {
-    const readpath = fs.readFileSync(data, { encoding: "utf8", flag: "r" });
+    const readpath = fs.readFileSync(data, { encoding: 'utf8', flag: 'r' });
     return JSON.parse(readpath);
   } catch (error) {
     console.log(err);
@@ -12,7 +12,7 @@ const JSONparse = (data) => {
 
 const YAMLparse = (data) => {
   try {
-    const readpath = fs.readFileSync(data, { encoding: "utf8", flag: "r" });
+    const readpath = fs.readFileSync(data, { encoding: 'utf8', flag: 'r' });
     return yaml.load(readpath);
   } catch (err) {
     console.log(err);
@@ -21,11 +21,11 @@ const YAMLparse = (data) => {
 
 export const fileParse = (data, type) => {
   switch (type) {
-    case "json":
+    case 'json':
       return JSONparse(data);
-    case "yaml":
+    case 'yaml':
       return YAMLparse(data);
-    case "yml":
+    case 'yml':
       return YAMLparse(data);
     default: throw new Error(`Some problem with format ${type}!`)
   }

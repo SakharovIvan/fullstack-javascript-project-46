@@ -1,11 +1,11 @@
-const space = "    ";
+const space = '    ';
 const gap = (depth) => space.repeat(depth);
 
 function getString(value, depth) {
   switch (typeof value) {
-    case "object":
+    case 'object':
       return value === null ? value : objCreate(value, depth);
-    case "string":
+    case 'string':
       return value;
     default:
       return value;
@@ -16,30 +16,30 @@ const objCreate = (obj, depth) => {
   const strings = keys.map((key) => {
     return `${gap(depth)}    ${key}: ${getString(obj[key], depth+1)}`;
   });
-  return `{\n${strings.join("\n")}\n${gap(depth)}}`;
+  return `{\n${strings.join('\n')}\n${gap(depth)}}`;
 };
 
 const stylisher = (value, depth) => {
   const result = value.map((str) => {
     const { key, action, oldValue, children, newValue } = str;
     switch (action) {
-      case "nested":
+      case 'nested':
         return `${gap(depth)}    ${key}: ${stylisher(children, depth + 1)}`;
-      case "added":
+      case 'added':
         return `${gap(depth)}  + ${key}: ${getString(newValue, depth+1)}`;
-      case "changed":
+      case 'changed':
         return `${gap(depth)}  - ${key}: ${getString(oldValue, depth+1)}\n${gap(
           depth
         )}  + ${key}: ${getString(newValue, depth+1)}`;
-      case "deleted":
+      case 'deleted':
         return `${gap(depth)}  - ${key}: ${getString(oldValue, depth+1)}`;
-      case "unchanged":
+      case 'unchanged':
         return `${gap(depth)}    ${key}: ${getString(oldValue, depth+1)}`;
       default:
-        throw new Error("something wrong");
+        throw new Error('something wrong');
     }
   });
-  return `{\n${result.join("\n")}\n${gap(depth)}}`;
+  return `{\n${result.join('\n')}\n${gap(depth)}}`;
 };
 
 const makeStylish = (tree) => {

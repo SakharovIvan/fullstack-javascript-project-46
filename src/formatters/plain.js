@@ -1,8 +1,8 @@
 function getString(value) {
   switch (typeof value) {
-    case "object":
+    case 'object':
       return value == null ? value : `[complex value]`;
-    case "string":
+    case 'string':
       return `'${value}'`;
     default:
       return value;
@@ -13,29 +13,29 @@ const makePlain = (tree) => {
   const style = (value, momKey) => {
     const result = value.map((str) => {
       const { key, action, oldValue, children, newValue } = str;
-      const path = momKey === "" ? `${key}` : `${momKey}.${key}`;
+      const path = momKey === '' ? `${key}` : `${momKey}.${key}`;
       switch (action) {
-        case "nested":
+        case 'nested':
           return style(children, path);
-        case "added":
+        case 'added':
           return `Property '${path}' was added with value: ${getString(
             newValue
           )}`;
-        case "changed":
+        case 'changed':
           return `Property '${path}' was updated. From ${getString(
             oldValue
           )} to ${getString(newValue)}`;
-        case "deleted":
+        case 'deleted':
           return `Property '${path}' was removed`;
-        case "unchanged":
+        case 'unchanged':
             return ;
         default:
-          console.log("error", str);
+          console.log('error', str);
       }
     });
-    return [...result].filter((item) => item !== undefined).join("\n");
+    return [...result].filter((item) => item !== undefined).join('\n');
   };
-  return style(tree, "");
+  return style(tree, '');
 };
 
 export default makePlain;
