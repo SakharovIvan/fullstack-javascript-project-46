@@ -26,7 +26,7 @@ const makePlain = (tree) => {
         case 'deleted':
           return `Property '${path}' was removed`;
         case 'unchanged':
-          return [];
+          return ;
         default:
           return console.log('error', str);
       }
