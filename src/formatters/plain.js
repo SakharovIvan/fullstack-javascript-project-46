@@ -20,20 +20,20 @@ const makePlain = (tree) => {
         case "added":
           return `Property '${path}' was added with value: ${getString(
             newValue
-          )}\n`;
+          )}`;
         case "changed":
           return `Property '${path}' was updated. From ${getString(
             oldValue
-          )} to ${getString(newValue)}\n`;
+          )} to ${getString(newValue)}`;
         case "deleted":
-          return `Property '${path}' was removed\n`; // ${getString(oldValue)}
+          return `Property '${path}' was removed`; // ${getString(oldValue)}
        // case "unchanged":
        //   return `Property '${path}' wasnot changed\n`;
         default:
           console.log("error", str);
       }
     });
-    return [...result].join("");
+    return [...result].join("\n");
   };
   return style(tree, "");
 };
