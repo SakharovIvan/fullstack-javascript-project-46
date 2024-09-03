@@ -12,9 +12,8 @@ function getString(value) {
 const makePlain = (tree) => {
   const style = (value, momKey) => {
     const result = value.map((str) => {
-      const 
-      { key, action, oldValue, children, newValue 
-      } = str;
+      const { key, action, oldValue, children, newValue 
+        } = str;
       const path = momKey === '' ? `${key}` : `${momKey}.${key}`;
       switch (action) {
         case 'nested':
@@ -26,12 +25,12 @@ const makePlain = (tree) => {
         case 'deleted':
           return `Property '${path}' was removed`;
         case 'unchanged':
-          return ;
+          return '';
         default:
           return console.log('error', str);
       }
     });
-    return [...result].filter((item) => item !== undefined).join('\n');
+    return [...result].filter((item) => item !== undefined || item!=='').join('\n');
   };
   return style(tree, '');
 };

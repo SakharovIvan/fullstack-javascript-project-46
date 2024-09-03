@@ -17,7 +17,6 @@ const YAMLparse = (data) => {
   } catch {
     throw new Error(`Some problem with parsdata ${data}!`);
   }
-  return
 };
 
 export const fileParse = (data, type) => {
