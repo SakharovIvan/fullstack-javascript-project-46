@@ -28,9 +28,9 @@ const makePlain = (tree) => {
         case 'deleted':
           return `Property '${path}' was removed`;
         case 'unchanged':
-            return ;
+          return;
         default:
-          console.log('error', str);
+          return console.log('error', str);
       }
     });
     return [...result].filter((item) => item !== undefined).join('\n');

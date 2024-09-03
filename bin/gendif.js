@@ -14,7 +14,7 @@ program
   .option('-f, --format <type>', 'output format (default: "stylish"')
   .helpOption('-h, --help', 'output usage information')
   .action((filepath1, filepath2, option) => {
-    const diff = makeCheck(filepath1, filepath2, option.format)
+    const diff = makeCheck(filepath1, filepath2, option.format);
     console.log(diff);
   });
 

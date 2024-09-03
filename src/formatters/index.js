@@ -13,4 +13,4 @@ const makeFormat = (tree, formatName) => {
       throw new Error(`Output format is not correct ${formatName}`);
   }
 };
-export default makeFormat
+export default makeFormat;
