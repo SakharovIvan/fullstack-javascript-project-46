@@ -19,7 +19,7 @@ const makeCheck = (path1, path2, style = "stylish") => {
 
   const difObject = getDiffernceObjects(data1, data2);
   const result = makeFormat(difObject, style);
-  return `${result}\n`;
+  return result;
 };
 
 export default makeCheck;
