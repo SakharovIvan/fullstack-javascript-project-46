@@ -18,17 +18,17 @@ const makePlain = (tree) => {
         case "nested":
           return style(children, path);
         case "added":
-          return `Property ${path} was added with value: ${getString(
+          return `Property '${path}' was added with value: ${getString(
             newValue
           )}\n`;
         case "changed":
-          return `Property ${path} was updated. From ${getString(
+          return `Property '${path}' was updated. From ${getString(
             oldValue
           )} to ${getString(newValue)}\n`;
         case "deleted":
-          return `Property ${path} ${getString(oldValue)} was removed\n`;
-        case "unchanged":
-          return `Property ${path} wasnot changed\n`;
+          return `Property '${path}' ${getString(oldValue)} was removed\n`;
+       // case "unchanged":
+       //   return `Property '${path}' wasnot changed\n`;
         default:
           console.log("error", str);
       }
