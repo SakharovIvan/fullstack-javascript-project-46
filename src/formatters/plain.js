@@ -1,7 +1,7 @@
 function getString(value) {
   switch (typeof value) {
     case "object":
-      return value == null ? value : JSON.stringify(value);
+      return value == null ? value : `[complex value]`
     case "string":
       return `'${value}'`;
     default:
@@ -26,7 +26,7 @@ const makePlain = (tree) => {
             oldValue
           )} to ${getString(newValue)}\n`;
         case "deleted":
-          return `Property '${path}' ${getString(oldValue)} was removed\n`;
+          return `Property '${path}' ${getString(oldValue)}` //was removed\n`;
        // case "unchanged":
        //   return `Property '${path}' wasnot changed\n`;
         default:
