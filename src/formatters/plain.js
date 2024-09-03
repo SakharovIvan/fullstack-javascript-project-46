@@ -26,7 +26,7 @@ const makePlain = (tree) => {
             oldValue
           )} to ${getString(newValue)}\n`;
         case "deleted":
-          return `Property '${path}' ${getString(oldValue)}` //was removed\n`;
+          return `Property '${path}' was removed\n`; // ${getString(oldValue)}
        // case "unchanged":
        //   return `Property '${path}' wasnot changed\n`;
         default:
