@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "bin": {
-    "gendif": "bin/gendif.js"
+    "gendiff": "bin/gendif.js"
   },
   "description": "A difference calculator is a program that determines the difference between two data structures.",
   "main": "./src/index.js",
