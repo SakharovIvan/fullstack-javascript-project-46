@@ -27,6 +27,8 @@ const makePlain = (tree) => {
           )} to ${getString(newValue)}`;
         case "deleted":
           return `Property '${path}' was removed`;
+        case "unchanged":
+            return [];
         default:
           console.log("error", str);
       }
