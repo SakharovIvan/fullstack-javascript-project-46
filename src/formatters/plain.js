@@ -15,9 +15,7 @@ const makePlain = (tree) => {
       const
         {
           key, action, oldValue, children, newValue,
-        }
-        =
-        str;
+        } = str;
       const path = momKey === '' ? `${key}` : `${momKey}.${key}`;
       switch (action) {
         case 'nested':
