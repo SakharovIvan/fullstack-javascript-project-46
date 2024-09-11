@@ -32,4 +32,4 @@ const fileParse = (data, type) => {
   }
 };
 
-export default fileParse
+export default fileParse;

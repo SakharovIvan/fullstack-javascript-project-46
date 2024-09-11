@@ -1,5 +1,5 @@
 import path from 'path';
-import { fileParse } from './parsers.js';
+import fileParse from './parsers.js';
 import getDiffernceObjects from './utils.js';
 import makeFormat from './formatters/index.js';
 
