@@ -1,7 +1,7 @@
 const space = '    ';
 const gap = (depth) => space.repeat(depth);
 
-function getString(value, depth) {
+const getString = (value, depth) => {
 
   const objCreate = (obj, depth) => {
     const keys = Object.keys(obj);
@@ -18,8 +18,6 @@ function getString(value, depth) {
       return value;
   }
 }
-
-
 
 const stylisher = (value, depth) => {
   const result = value.map((str) => {
@@ -45,8 +43,6 @@ const stylisher = (value, depth) => {
   return `{\n${result.join('\n')}\n${gap(depth)}}`;
 };
 
-const makeStylish = (tree) => {
-  return stylisher(tree, 0);
-};
+const makeStylish = (tree) => stylisher(tree, 0);
 
 export default makeStylish;
