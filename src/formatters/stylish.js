@@ -2,6 +2,13 @@ const space = '    ';
 const gap = (depth) => space.repeat(depth);
 
 function getString(value, depth) {
+
+  const objCreate = (obj, depth) => {
+    const keys = Object.keys(obj);
+    const strings = keys.map((key) => `${gap(depth)}    ${key}: ${getString(obj[key], depth + 1)}`);
+    return `{\n${strings.join('\n')}\n${gap(depth)}}`;
+  };
+  
   switch (typeof value) {
     case 'object':
       return value === null ? value : objCreate(value, depth);
@@ -12,11 +19,7 @@ function getString(value, depth) {
   }
 }
 
-const objCreate = (obj, depth) => {
-  const keys = Object.keys(obj);
-  const strings = keys.map((key) => `${gap(depth)}    ${key}: ${getString(obj[key], depth + 1)}`);
-  return `{\n${strings.join('\n')}\n${gap(depth)}}`;
-};
+
 
 const stylisher = (value, depth) => {
   const result = value.map((str) => {

@@ -19,7 +19,7 @@ const YAMLparse = (data) => {
   }
 };
 
-export const fileParse = (data, type) => {
+const fileParse = (data, type) => {
   switch (type) {
     case 'json':
       return JSONparse(data);
@@ -31,3 +31,5 @@ export const fileParse = (data, type) => {
       throw new Error(`Some problem with format ${type}!`);
   }
 };
+
+export default fileParse

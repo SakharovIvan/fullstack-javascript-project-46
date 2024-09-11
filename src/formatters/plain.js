@@ -11,8 +11,9 @@ function getString(value) {
 
 const makePlain = (tree) => {
   const style = (value, momKey) => {
+
     const result = value.map((str) => {
-      const { key, action, oldValue, children, newValue 
+      const { key, action, oldValue, children, newValue
         } = str;
       const path = momKey === '' ? `${key}` : `${momKey}.${key}`;
       switch (action) {
@@ -30,7 +31,7 @@ const makePlain = (tree) => {
           return console.log('error', str);
       }
     });
-    return [...result].filter((item) => item !== undefined).join('\n').replace(/\n$/m, '');;
+    return [...result].filter((item) => item !== undefined).join('\n').replace(/\n$/m, '');
   };
   return style(tree, '');
 };
