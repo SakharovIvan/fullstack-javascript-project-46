@@ -2,7 +2,6 @@ const space = '    ';
 const gap = (depth) => space.repeat(depth);
 
 const getString = (value, depth) => {
-
   const objCreate = (obj, dep) => {
     const keys = Object.keys(obj);
     const strings = keys.map((key) => `${gap(dep)}    ${key}: ${getString(obj[key], dep + 1)}`);
@@ -21,9 +20,10 @@ const getString = (value, depth) => {
 
 const stylisher = (value, depth) => {
   const result = value.map((str) => {
-    const 
-    { key, action, oldValue, children, newValue,
-    } = str;
+    const
+      {
+        key, action, oldValue, children, newValue,
+      } = str;
     switch (action) {
       case 'nested':
         return `${gap(depth)}    ${key}: ${stylisher(children, depth + 1)}`;
