@@ -14,7 +14,7 @@ const makePlain = (tree) => {
     const result = value.map((str) => {
       const
         {
-         key, action, oldValue, children, newValue,
+          key, action, oldValue, children, newValue,
         }
         =
         str;
